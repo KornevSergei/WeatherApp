@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     //обьявляем для работы
     TextView cityName;
     Button searchButton;
+    TextView result;
 
     //адрес ЮРЛ и получение результата в Стринг
     class Weather extends AsyncTask<String, Void, String> {
@@ -62,8 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void search(View view) {
         //связываем
-        cityName = findViewById(R.id.editText);
+        cityName = findViewById(R.id.cityName);
         searchButton = findViewById(R.id.searchButton);
+        result = findViewById(R.id.result);
 
         //введеный город приводим к Стринг
         String cName = cityName.getText().toString();
@@ -81,12 +83,17 @@ public class MainActivity extends AppCompatActivity {
             //JSON
             JSONObject jsonObject = new JSONObject(content);
             String weatherData = jsonObject.getString("weather");
+            String mainTemperature = jsonObject.getString("main");
+            double visibility;
+
+
             Log.i("weatherData", weatherData);
             JSONArray array = new JSONArray(weatherData);
 
 
             String main = "";
             String description = "";
+            String temperature = "";
 
             for (int i = 0; i < array.length(); i++) {
                 JSONObject weatherPart = array.getJSONObject(i);
@@ -94,8 +101,24 @@ public class MainActivity extends AppCompatActivity {
                 description = weatherPart.getString("description");
             }
 
+            JSONObject mainPart = new JSONObject(mainTemperature);
+            temperature = mainPart.getString("temp");
+
+            visibility = Double.parseDouble(jsonObject.getString("visibility"));
+            int visibilityInKilometer = (int) visibility/1000;
+
             Log.i("main", main);
             Log.i("description", description);
+            Log.i("Temperature", temperature);
+
+
+            //устанавливаем полученный текст
+
+            String resultText = "Main : " + main +
+                    "\nDescription : " + description +
+                    "\nTemperature : " + temperature +
+                    "\nVisibility : " + visibilityInKilometer + " K";
+            result.setText(resultText);
 
 
         } catch (Exception e) {
