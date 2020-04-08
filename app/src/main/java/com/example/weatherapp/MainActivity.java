@@ -114,12 +114,11 @@ public class MainActivity extends AppCompatActivity {
 
             //устанавливаем полученный текст
 
-            String resultText = "Main : " + main +
+            String resultText = "Состояние : " + main +
                     "\nDescription : " + description +
-                    "\nTemperature : " + temperature +
-                    "\nVisibility : " + visibilityInKilometer + " K";
+                    "\nТемпература : " + temperature + "°C" +
+                    "\nВидимость : " + visibilityInKilometer + " км";
             result.setText(resultText);
-
 
         } catch (Exception e) {
             e.printStackTrace();
