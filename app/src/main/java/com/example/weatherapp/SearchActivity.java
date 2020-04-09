@@ -21,18 +21,17 @@ import java.net.URL;
 
 public class SearchActivity extends AppCompatActivity {
 
+    //обьявляем для работы
+    TextView cityName;
+    Button searchButton;
+    TextView result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-
-    }    //обьявляем для работы
-
-    TextView cityName;
-    Button searchButton;
-    TextView result;
+    }
 
     //адрес ЮРЛ и получение результата в Стринг
     class Weather extends AsyncTask<String, Void, String> {
@@ -69,6 +68,7 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+
     public void search(View view) {
         //связываем
         cityName = findViewById(R.id.cityName);
@@ -78,7 +78,7 @@ public class SearchActivity extends AppCompatActivity {
         //введеный город приводим к Стринг
         String cName = cityName.getText().toString();
 
-        //рприсваимваем обьекту данные и делаем проверку на получение
+        //присваимваем обьекту данные и делаем проверку на получение
         String content;
         Weather weather = new Weather();
         try {
@@ -121,7 +121,6 @@ public class SearchActivity extends AppCompatActivity {
 
 
             //устанавливаем полученный текст
-
             String resultText = "Состояние : " + main +
                     "\nDescription : " + description +
                     "\nТемпература : " + temperature + "°C" +
@@ -131,6 +130,8 @@ public class SearchActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
+
+
+
