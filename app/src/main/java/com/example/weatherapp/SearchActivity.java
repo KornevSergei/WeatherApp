@@ -21,7 +21,15 @@ import java.net.URL;
 
 public class SearchActivity extends AppCompatActivity {
 
-    //обьявляем для работы
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search);
+
+
+    }    //обьявляем для работы
+
     TextView cityName;
     Button searchButton;
     TextView result;
@@ -105,7 +113,7 @@ public class SearchActivity extends AppCompatActivity {
             temperature = mainPart.getString("temp");
 
             visibility = Double.parseDouble(jsonObject.getString("visibility"));
-            int visibilityInKilometer = (int) visibility/1000;
+            int visibilityInKilometer = (int) visibility / 1000;
 
             Log.i("main", main);
             Log.i("description", description);
@@ -123,14 +131,6 @@ public class SearchActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-
 
     }
 }
